@@ -3,14 +3,14 @@ import { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
-export default function SingUp() {
+export default function FormRegister({ action }) {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <form className="grid gap-y-6">
+    <form className="grid gap-y-6" action={action}>
       <fieldset className="grid">
         <label className="text-[#7b7c7b]" htmlFor="username">
           User
