@@ -2,9 +2,10 @@
 import { useActionState, useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { FormInputText } from "./FormInputText";
 
 export default function FormRegister({ action }) {
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -18,28 +19,18 @@ export default function FormRegister({ action }) {
         </p>
       )}
       <form className="grid gap-y-6" action={formAction}>
-        <fieldset className="grid">
-          <label className="text-[#7b7c7b]" htmlFor="username">
-            User
-          </label>
-          <input
-            className="px-2 py-1 text-[#7b7c7b] border border-[#e8e9e9] hover:border-[#b1b2b2] focus:border-[#b1b2b2] outline-none shadow-md rounded-lg"
-            name="username"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </fieldset>
-        <fieldset className="grid">
-          <label className="text-[#7b7c7b]" htmlFor="email">
-            Email
-          </label>
-          <input
-            className="px-2 py-1 text-[#7b7c7b] border border-[#e8e9e9] hover:border-[#b1b2b2] focus:border-[#b1b2b2] outline-none shadow-md rounded-lg"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </fieldset>
+        <FormInputText
+          id="username"
+          label="User"
+          value={username}
+          setValue={setUsername}
+        />
+        <FormInputText
+          id="email"
+          label="Email"
+          value={email}
+          setValue={setEmail}
+        />
         <fieldset className="grid">
           <label className="text-[#7b7c7b]" htmlFor="password">
             Password
