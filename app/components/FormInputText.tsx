@@ -11,9 +11,9 @@ export const FormInputText: FC<FormInputTextProps> = ({
   value,
   setValue,
   ...inputProps
-}) => {
+}) => (
   <fieldset className="grid">
-    <label className="text-[#7b7c7b]" htmlFor="username">
+    <label className="text-[#7b7c7b]" htmlFor={id}>
       {label}
     </label>
     <input
@@ -24,5 +24,5 @@ export const FormInputText: FC<FormInputTextProps> = ({
       onChange={(e) => setValue(e.target.value)}
       {...inputProps}
     />
-  </fieldset>;
-};
+  </fieldset>
+);
