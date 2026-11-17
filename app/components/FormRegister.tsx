@@ -31,27 +31,13 @@ export default function FormRegister({ action }) {
           value={email}
           setValue={setEmail}
         />
-        <fieldset className="grid">
-          <label className="text-[#7b7c7b]" htmlFor="password">
-            Password
-          </label>
-          <div className="relative flex items-center">
-            <input
-              className="w-full pl-2 pr-9 py-1 text-[#7b7c7b] border border-[#e8e9e9] hover:border-[#b1b2b2] focus:border-[#b1b2b2] outline-none shadow-md rounded-lg"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type={showPassword ? "text" : "password"}
-            />
-            <button
-              className="cursor-pointer absolute right-2"
-              type="button"
-              onClick={() => setShowPassword((sp) => !sp)}
-            >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </button>
-          </div>
-        </fieldset>
+        <FormInputText
+          id="password"
+          label="Password"
+          value={password}
+          type="password"
+          setValue={setPassword}
+        />
         <button className="py-2 bg-[#141516] text-white shadow-md cursor-pointer hover:shadow-none rounded-lg">
           Sing in
         </button>
