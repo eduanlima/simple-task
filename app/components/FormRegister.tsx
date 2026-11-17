@@ -1,23 +1,22 @@
 "use client";
-import { useActionState, useState } from "react";
-import { FaEye } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa";
+import { FC, useActionState, useState } from "react";
 import { FormInputText } from "./FormInputText";
+import { FormButton } from "./FormButton";
+import { FormError } from "./FormError";
 
-export default function FormRegister({ action }) {
+type FormRegisterProps = {
+  action: (_: string, formData: FormData) => Promise<string>;
+};
+
+export const FormRegister: FC<FormRegisterProps> = ({ action }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, formAction, isPending] = useActionState(action, "");
 
   return (
     <>
-      {!isPending && errorMessage && (
-        <p className="px-4 py-2 bg-red-400 text-white font-bold text-sm rounded-lg">
-          {errorMessage}
-        </p>
-      )}
+      {!isPending && <FormError message={errorMessage} />}
       <form className="grid gap-y-6" action={formAction}>
         <FormInputText
           id="username"
@@ -38,10 +37,8 @@ export default function FormRegister({ action }) {
           type="password"
           setValue={setPassword}
         />
-        <button className="py-2 bg-[#141516] text-white shadow-md cursor-pointer hover:shadow-none rounded-lg">
-          Sing in
-        </button>
+        <FormButton>Sing up</FormButton>
       </form>
     </>
   );
-}
+};

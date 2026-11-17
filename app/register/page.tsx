@@ -1,5 +1,5 @@
 import Link from "next/link";
-import FormRegister from "../components/FormRegister";
+import { FormRegister } from "../components/FormRegister";
 import { redirect } from "next/navigation";
 
 export default function SingUp() {
@@ -9,12 +9,11 @@ export default function SingUp() {
     const email = formData.get("email")?.toString();
     const password = formData.get("password")?.toString();
 
-    if (!username || !email || !password)
-      return "Fill all the fields.";
+    if (!username || !email || !password) return "Fill all the fields.";
 
-    if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email))
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email))
       return "Invalid email.";
-    
+
     if (password.length < 6)
       return "The password must be six characters longer.";
 
@@ -33,10 +32,9 @@ export default function SingUp() {
         },
       });
 
-      const {token, message} = await res.json();
+      const { token, message } = await res.json();
 
-      if (!token)
-        return message;
+      if (!token) return message;
 
       redirect("/");
     } catch {
