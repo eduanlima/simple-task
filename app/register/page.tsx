@@ -35,12 +35,12 @@ export default function SingUp() {
       const { token, message } = await res.json();
 
       if (!token) return message;
-
-      redirect("/");
     } catch {
       console.log("handlerRegister error");
       return "An error occurred during registration.";
     }
+
+    redirect("/tasks");
   };
 
   return (
