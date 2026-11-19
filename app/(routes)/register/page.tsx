@@ -3,6 +3,8 @@ import { FormRegister } from "../../components/FormRegister";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { Metadata } from "next";
+import { checkInvalidEmail, checkInvalidPassword } from "@/app/libs/utils";
+import { COOKIE } from "@/app/constantes/constantes";
 
 const PAGE_TITLE = "Sing up";
 
@@ -19,10 +21,9 @@ export default function SingUp() {
 
     if (!username || !email || !password) return "Fill all the fields.";
 
-    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email))
-      return "Invalid email.";
+    if (checkInvalidEmail(email)) return "Invalid email.";
 
-    if (password.length < 6)
+    if (checkInvalidPassword(password))
       return "The password must be six characters longer.";
 
     try {
@@ -32,7 +33,7 @@ export default function SingUp() {
         password,
       };
 
-      const res = await fetch("http://localhost:4000/auth/register", {
+      const res = await fetch(`${process.env.BACK_END_URL}/auth/register`, {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
@@ -45,12 +46,7 @@ export default function SingUp() {
       if (!token) return message;
 
       const cookieStore = await cookies();
-      cookieStore.set("token", token, {
-        httpOnly: true,
-        secure: true,
-        path: "/",
-        maxAge: 60 * 60 * 24,
-      });
+      cookieStore.set("token", token, COOKIE);
     } catch {
       console.log("handlerRegister error");
       return "An error occurred during registration.";
@@ -60,12 +56,12 @@ export default function SingUp() {
   };
 
   return (
-    <div className="grid gap-y-4 px-8 min-w-100 py-12 bg-[#fdfcfc] rounded-3xl shadow-xl">
+    <>
       <h1 className="text-4xl text-center font-bold">Create account</h1>
       <FormRegister action={handleRegister} />
       <Link className="text-center underline" href="/login">
         Already have an account? Sing in
       </Link>
-    </div>
+    </>
   );
 }
