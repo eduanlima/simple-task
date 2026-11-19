@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FormRegister } from "../components/FormRegister";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
 export default function SingUp() {
   const handleRegister = async (_: string, formData: FormData) => {
@@ -35,6 +36,14 @@ export default function SingUp() {
       const { token, message } = await res.json();
 
       if (!token) return message;
+
+      const cookieStore = await cookies();
+      cookieStore.set("token", token, {
+        httpOnly: true,
+        secure: true,
+        path: "/",
+        maxAge: 60 * 60 * 24,
+      });
     } catch {
       console.log("handlerRegister error");
       return "An error occurred during registration.";
