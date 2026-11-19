@@ -1,3 +1,11 @@
+import { Metadata } from "next";
+
+const PAGE_TITLE = "Tasks";
+
+export const metadata: Metadata = {
+  title: PAGE_TITLE,
+};
+
 export default function Tasks() {
   return (
     <div className="grid gap-y-4 px-8 min-w-100 py-12 bg-[#fdfcfc] rounded-3xl shadow-xl">

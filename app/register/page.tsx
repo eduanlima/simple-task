@@ -2,6 +2,13 @@ import Link from "next/link";
 import { FormRegister } from "../components/FormRegister";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import { Metadata } from "next";
+
+const PAGE_TITLE = "Sing up";
+
+export const metadata: Metadata = {
+  title: PAGE_TITLE,
+};
 
 export default function SingUp() {
   const handleRegister = async (_: string, formData: FormData) => {
