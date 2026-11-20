@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useActionState, useState } from "react";
+import { FC, useActionState, useEffect, useState } from "react";
 import { FormError } from "./FormError";
 
 type FormTasksProps = {
@@ -11,6 +11,10 @@ export const FormTasks: FC<FormTasksProps> = ({ action }) => {
   const [task, setTask] = useState("");
   const [errorMessage, formAction, isPending] = useActionState(action, "");
 
+  useEffect(() => {
+    if (!isPending && !errorMessage) setTask("");
+  }, [isPending, errorMessage]);
+
   return (
     <>
       {!isPending && <FormError message={errorMessage} />}
@@ -20,7 +24,7 @@ export const FormTasks: FC<FormTasksProps> = ({ action }) => {
           name="task"
           value={task}
           onChange={(e) => setTask(e.target.value)}
-          placeholder="Give a name to your task"
+          placeholder="Give a name for your task"
         />
 
         <button className="absolute top-0 right-0 bottom-0 px-3 bg-[#141516] text-white cursor-pointer hover:shadow-none rounded-r-lg">
