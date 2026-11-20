@@ -1,3 +1,4 @@
+import { FormTasks } from "@/app/components/forms/FormTasks";
 import { Metadata } from "next";
 
 const PAGE_TITLE = "Tasks";
@@ -10,6 +11,7 @@ export default function Tasks() {
   return (
     <>
       <h1 className="text-4xl text-center font-bold">Tasks</h1>
+      <FormTasks />
     </>
   );
 }
