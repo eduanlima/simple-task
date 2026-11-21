@@ -2,7 +2,8 @@ import { FormTasks } from "@/app/components/forms/FormTasks";
 import { fetchWithToken } from "@/app/libs/fetchWithToken";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
-import { handleCreateTask } from "./actions";
+import { handleCompleteTask, handleCreateTask } from "./actions";
+import { TaskCard } from "@/app/components/forms/TaskCard";
 
 const PAGE_TITLE = "Tasks";
 
@@ -40,9 +41,16 @@ export default async function Tasks() {
     <>
       <h1 className="text-4xl text-center font-bold">Tasks</h1>
       <FormTasks action={handleCreateTask} />
-      <ul>
+      <ul className="grid gap-y-3">
         {tasks.reverse().map((t) => (
-          <li key={t._id}>{t.title}</li>
+          <TaskCard
+            key={t._id}
+            id={t._id}
+            completed={t.completed}
+            completeAction={handleCompleteTask}
+          >
+            {t.title}
+          </TaskCard>
         ))}
         ;
       </ul>
