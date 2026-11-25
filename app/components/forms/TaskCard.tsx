@@ -5,12 +5,14 @@ interface TaskCardProps extends PropsWithChildren {
   id: string;
   completed: boolean;
   completeAction: (formData: FormData) => Promise<void>;
+  deleteAction: (formData: FormData) => Promise<void>;
 }
 
 export const TaskCard: FC<TaskCardProps> = ({
   id,
   completed,
   completeAction,
+  deleteAction,
   children,
 }) => (
   <li
@@ -26,7 +28,8 @@ export const TaskCard: FC<TaskCardProps> = ({
         name="completed"
         type="checkbox"
         defaultChecked={completed}
-        onChange={(e) => e.currentTarget.form?.requestSubmit()}
+        onChange={(e) => !completed && e.currentTarget.form?.requestSubmit()}
+        disabled={completed}
       />
     </form>
     <p className={classNames("cursor-default", { "line-through": completed })}>
@@ -34,7 +37,7 @@ export const TaskCard: FC<TaskCardProps> = ({
     </p>
 
     {!completed && (
-      <form className="flex" action={completeAction}>
+      <form className="flex" action={deleteAction}>
         <input name="id" type="hidden" value={id} />
         <button className="cursor-pointer hover:[&_svg_path]:stroke-red-500">
           <svg

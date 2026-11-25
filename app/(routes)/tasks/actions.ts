@@ -55,11 +55,8 @@ export const handleCompleteTask = async (formData: FormData) => {
             return;
         }
 
-        const completed = formData.get("completed");
-        const endpoint = completed !== null ? "complete" : "uncomplete";
-
         const { message } = await fetchWithToken(
-            `${process.env.BACK_END_URL}/tasks/${id}/${endpoint}`,
+            `${process.env.BACK_END_URL}/tasks/${id}/complete`,
             token,
             {
                 method: "PUT",
@@ -76,5 +73,41 @@ export const handleCompleteTask = async (formData: FormData) => {
         console.log("An error occurred during updating task.");
         return;
     }
+};
 
+export const handleDeleteTask = async (formData: FormData) => {
+    const id = formData.get("id")?.toString();
+
+    if (!id) {
+        console.error("You must send id's tasks.");
+        return;
+    }
+
+    try {
+        const cookieStore = await cookies();
+        const token = cookieStore.get("token")?.value;
+
+        if (!token) {
+            console.error("There is no token for request.");
+            return;
+        }
+
+        const { message } = await fetchWithToken(
+            `${process.env.BACK_END_URL}/tasks/${id}`,
+            token,
+            {
+                method: "DELETE",
+            },
+        );
+
+        if (message) {
+            console.error(message);
+            return;
+        }
+
+        updateTag("get-tasks");
+    } catch {
+        console.log("An error occurred during deleting task.");
+        return;
+    }
 };

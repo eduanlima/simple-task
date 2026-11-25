@@ -27,7 +27,10 @@ export const FormTasks: FC<FormTasksProps> = ({ action }) => {
           placeholder="Give a name for your task"
         />
 
-        <button className="absolute top-0 right-0 bottom-0 px-3 bg-[#141516] text-white cursor-pointer hover:shadow-none rounded-r-lg">
+        <button
+          className="absolute top-0 right-0 bottom-0 px-3 bg-[#141516] text-white cursor-pointer hover:shadow-none rounded-r-lg"
+          disabled={isPending}
+        >
           +
         </button>
       </form>

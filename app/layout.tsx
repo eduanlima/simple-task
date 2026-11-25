@@ -20,7 +20,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
         <main className="mt-24 mb-14 flex justify-center">{children}</main>
 
-        <footer className="text-center">
+        <footer className="mb-14 text-center">
           <p className="text-sm">
             Project created during a Front-end fudamentals course using React
             and Next
