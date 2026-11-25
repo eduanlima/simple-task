@@ -52,7 +52,6 @@ export default async function Tasks() {
             {t.title}
           </TaskCard>
         ))}
-        ;
       </ul>
     </>
   );

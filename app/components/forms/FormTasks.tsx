@@ -20,7 +20,7 @@ export const FormTasks: FC<FormTasksProps> = ({ action }) => {
       {!isPending && <FormError message={errorMessage} />}
       <form className="relative shadow-lg rounded-lg" action={formAction}>
         <input
-          className="w-full px-2 py-1 pr-10 text-[#7b7c7b] border border-[#e8e9e9] hover:border-[#b1b2b2] focus:border-[#b1b2b2] outline-none rounded-lg"
+          className="w-full pl-2 pr-10 py-1 text-[#7b7c7b] border border-[#e8e9e9] hover:border-[#b1b2b2] focus:border-[#b1b2b2] outline-none rounded-lg"
           name="task"
           value={task}
           onChange={(e) => setTask(e.target.value)}

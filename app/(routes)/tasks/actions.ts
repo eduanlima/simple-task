@@ -55,8 +55,11 @@ export const handleCompleteTask = async (formData: FormData) => {
             return;
         }
 
+        const completed = formData.get("completed");
+        const endpoint = completed !== null ? "complete" : "uncomplete";
+
         const { message } = await fetchWithToken(
-            `${process.env.BACK_END_URL}/tasks/${id}/complete`,
+            `${process.env.BACK_END_URL}/tasks/${id}/${endpoint}`,
             token,
             {
                 method: "PUT",

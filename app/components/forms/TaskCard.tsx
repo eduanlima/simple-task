@@ -1,6 +1,6 @@
 "use client";
 import { FC, PropsWithChildren } from "react";
-
+import classNames from "classnames";
 interface TaskCardProps extends PropsWithChildren {
   id: string;
   completed: boolean;
@@ -13,8 +13,13 @@ export const TaskCard: FC<TaskCardProps> = ({
   completeAction,
   children,
 }) => (
-  <li className="p-4 text-[#7b7c7b] border border-[#c8c9e9] rounded-lg hover:border-[#b1b2b2]">
-    <form action={completeAction}>
+  <li
+    className={classNames(
+      "p-4 grid grid-cols-[auto_1fr] gap-x-2 items-center text-[#7b7c7b] border border-[#c8c9e9] rounded-lg hover:border-[#b1b2b2]",
+      { "opacity-50": completed },
+    )}
+  >
+    <form className="flex" action={completeAction}>
       <input name="id" type="hidden" value={id} />
       <input
         className="accent-[#141516]"
@@ -24,7 +29,6 @@ export const TaskCard: FC<TaskCardProps> = ({
         onChange={(e) => e.currentTarget.form?.requestSubmit()}
       />
     </form>
-
-    {children}
+    <p>{children}</p>
   </li>
 );
